@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Foxy Nhi's Survey</title>
+    <meta charset='UTF-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel='stylesheet' href='styles.css' />
+  </head>
+  <body>
+    <h1 id='title' class='text-center'>Foxy Nhi's Survey Project</h1>
+    <p id='description' class='text-center'>Welcome! Thank you for taking your time to review my project.</p>
+
+    <form id='survey-form' method='post'>
+      <div class='form-group'>
+        <label for='name' id='name-label'>Name</label>
+          <input class='form-input' id='name' type='text' name='name' placeholder='Enter your name' required/>
+      </div>
+
+      <div class='form-group'>
+        <label for='email' id='email-label'>Email</label>
+          <input class='form-input' id='email' type='email' name='email' placeholder='Enter your email' required/>
+      </div>
+
+      <div class='form-group'>
+        <label for='age' id='number-label'>Age (optional)</label>
+          <input class='form-input' id='number' type='number' name='age' placeholder='Your age' min='10' max='120' />
+      </div>
+
+      <div class='form-group'>
+        <p for='dropdown'>Which option best describes your current role?</p>
+        <select class='form-input' id='dropdown' name='current-role' required>
+          <option value='' disabled selected value>Select your current role</option>
+          <option value='student'>Student</option>
+          <option value='ful-learner'>Full-time learner</option>
+          <option value='ful-job'>Full-time job</option>
+          <option value='pther'>Other</option>
+        </select>        
+      </div>
+
+      <div class='form-group'>
+        <p>Do you like my form?</p>
+        <label for='like-strong' ><input id='like-strong' name='like' value='like-strong' type='radio' checked class='radio-input' /> Hell yeah!</label>
+
+        <label for='like-ok'><input id='like-ok' name='like' value='like-ok' type='radio' class='radio-input'/> Yes!</label>
+
+        <label for='like-meh'><input id='like-meh' name='like' value='like-meh' type='radio' class='radio-input'/> Meh...</label>
+      </div>
+
+      <div class='form-group'>
+        <p>What course are you taking at freeCodeCamp?</p>
+        <label for='front-end'><input class='checkbox' type='checkbox' id='front-end' name='course' value='front-end' class='inline'/> Front End Development</label>
+        <label for='back-end'><input class='checkbox' type='checkbox' id='back-end' name='course' value='back-end' class='inline'/> Back End Development</label>
+        <label for='rel-database'><input class='checkbox' type='checkbox' id='rel-database' name='course' value='rel-database' class='inline'/> Relational Database</label>
+        <label for='data-analysis'><input class='checkbox' type='checkbox' id='data-analysis' name='course' value='data-analysis' class='inline'/> Data Analysis</label>
+        <label for='mach-learn'><input class='checkbox' type='checkbox' id='mach-learn' name='course' value='mach-learn' class='inline'/> Machine Learning</label>
+        <label for='col-alg'><input class='checkbox' type='checkbox' id='col-alg' name='course' value='col-alg' class='inline'/> College Algebra</label>
+        <label for='none'><input class='checkbox' type='checkbox' id='none' name='course' value='none' class='inline'/> None of the above</label>
+      </div>
+
+      <div class='form-group'>
+        <p>Any comments or suggestions for my form?</p>
+        <textarea id='suggestion' name='suggestion' placeholder='I like your form!' rows='5'></textarea>
+      </div>
+
+      <input id='submit' type='submit' value='Submit'/>
+    </form>
+  </body>
+</html>
