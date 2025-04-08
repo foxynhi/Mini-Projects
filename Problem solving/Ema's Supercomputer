@@ -1,0 +1,111 @@
+Ema built a quantum computer! Help her test its capabilities by solving the problem below.
+
+Given a grid of size n x m, each cell in the grid is either good or
+bad.
+
+A valid plus is defined here as the crossing of two segments (horizontal and vertical) of equal lengths. These lengths must be odd, and the middle cell of its horizontal segment must cross the middle cell of its vertical segment.
+
+In the diagram below, the blue pluses are valid and the orange ones are not valid.
+
+Find the two largest valid pluses that can be drawn on
+cells in the grid, and return an integer denoting the maximum product of their areas. In the above diagrams, our largest pluses have areas of and . The product of their areas is
+
+
+Note: The two pluses cannot overlap, and the product of their areas should be maximal.
+
+Function Description
+
+Complete the twoPluses function in the editor below. It should return an integer that represents the area of the two largest pluses.
+
+twoPluses has the following parameter(s):
+
+    grid: an array of strings where each string represents a row and each character of the string represents a column of that row
+
+
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'twoPluses' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING_ARRAY grid as parameter.
+#  BGBBGB
+#  GGGGGG
+#  BGBGBB
+#  GGGGGG
+#  BGBGBB
+#  BGBGBB
+
+def isValid(i, j, arm):
+    if j+arm >= len(grid[0]) or grid[i][j+arm] != 'G':
+        return False
+    if j-arm < 0 or grid[i][j-arm] != 'G':
+        return False
+    if i+arm >= len(grid) or grid[i+arm][j] != 'G':
+        return False
+    if i-arm < 0 or grid[i-arm][j] != 'G':
+        return False
+    return True
+    
+def checkOverlap(plus1, plus2):
+    x1, y1, arm1 = plus1[1]
+    x2, y2, arm2 = plus2[1]
+    x1, y1, arm1 = plus1[1]
+    x2, y2, arm2 = plus2[1]
+    
+    set1 = set((x1+i, y1) for i in range(-arm1, arm1+1)) | set((x1, y1 + i) for i in range(-arm1, arm1 + 1))
+    set2 = set((x2 + j, y2) for j in range(-arm2, arm2 + 1)) | set((x2, y2 + j) for j in range(-arm2, arm2 + 1))
+    
+    return not set1.isdisjoint(set2)
+    
+def twoPluses(grid):
+    # Write your code here
+    rows, cols = len(grid), len(grid[0])
+    pluses = []
+    for i in range(rows):
+        for j in range(cols):
+            
+            if grid[i][j] == 'G':
+                arm = 0
+                while isValid(i, j, arm):
+                    pluses.append([(1 + arm*4), (i, j, arm)])
+                    arm += 1
+                    
+    pluses = sorted(pluses, reverse=True)
+    result = 0
+    for i in range(len(pluses) - 1):
+        for j in range(i + 1, len(pluses)):
+            plus1 = pluses[i]
+            plus2 = pluses[j]
+            if checkOverlap(plus1, plus2) is False:
+                result = max(result, plus1[0] * plus2[0])
+    return result
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])
+
+    m = int(first_multiple_input[1])
+
+    grid = []
+
+    for _ in range(n):
+        grid_item = input()
+        grid.append(grid_item)
+
+    result = twoPluses(grid)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
